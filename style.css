@@ -278,7 +278,14 @@ body {
 
 /* RESPONSIVIDADE DO MODAL PARA HACKATHON */
 @media(max-width: 800px) {
-    body { flex-direction: column; overflow-y: auto; }
-    .demo-panel { position: static; transform: none; width: 100%; max-width: 400px; margin-bottom: 16px; box-shadow: none; }
-    .phone-wrapper { width: 100%; max-width: 400px; height: 780px; }
+    body { flex-direction: column; overflow-y: auto; padding: 10px; }
+    .demo-panel { position: static; transform: none; width: 100%; max-width: 380px; margin-bottom: 16px; box-shadow: none; }
+    .phone-wrapper { width: 100%; max-width: 380px; height: 80vh; min-height: 580px; }
+}
+/* Ajuste fino para telas de notebooks menores de mesa */
+@media(max-height: 800px) {
+    .phone-wrapper {
+        height: 90vh;
+        max-height: 700px;
+    }
 }
