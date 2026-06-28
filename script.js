@@ -70,7 +70,7 @@ async function carregarConhecimentoDaCisca() {
             throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`);
         }
 
-        // Coloca todo o conteúdo do JSON para dentro da nossa variável
+        // CORREÇÃO AQUI: Trocado 'reply' por 'resposta' e 'bancoDeRespostas' por 'ciscaKnowledge'
         ciscaKnowledge = await resposta.json();
         
         console.log("Prosa carregada! A Cisca está pronta para responder sobre o CAR.");
