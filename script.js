@@ -75,6 +75,39 @@ const ciscaKnowledge = {
     "credito rural": "Com o CAR aprovado e 100% regularizado, o banco vê que sua terra está em dia e libera os financiamentos e o Crédito Rural com os juros mais baixos para você investir na lavoura!"
 };
 
+// 2. Função assíncrona para buscar as respostas no arquivo JSON
+async function carregarConhecimentoDaCisca() {
+    try {
+        // Altere 'perguntas.json' para o caminho correto caso o arquivo esteja em outra pasta
+        const resposta = await fetch('perguntas.json'); 
+        
+        // Se o arquivo não for encontrado, avisa o sistema
+        if (!resposta.ok) {
+            throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`);
+        }
+
+        // CORREÇÃO AQUI: Trocado 'reply' por 'resposta' e 'bancoDeRespostas' por 'ciscaKnowledge'
+        ciscaKnowledge = await resposta.json();
+        
+        console.log("Prosa carregada! A Cisca está pronta para responder sobre o CAR.");
+    } catch (xabu) {
+        console.error("Eita! Deu erro ao puxar o conhecimento da Cisca:", xabu);
+    }
+}
+
+// 3. Função auxiliar para você chamar no seu chatbot ou caixinha de pesquisa
+function perguntarParaCisca(chaveDaPergunta) {
+    // Verifica se o JSON já foi carregado e se a pergunta existe
+    if (ciscaKnowledge && ciscaKnowledge[chaveDaPergunta]) {
+        return ciscaKnowledge[chaveDaPergunta];
+    } else {
+        return "Ih, meu filho, sobre isso aí a Cisca ainda não ouviu falar na redondeza...";
+    }
+}
+
+// 4. LIGA OS MOTORES: Executa a carga dos dados assim que o script roda
+carregarConhecimentoDaCisca();
+
 let activeScenario = 1;
 
 // NAVEGAÇÃO DE TELAS PRINCIPAIS
