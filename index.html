@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siscar+ | Inteligência Ambiental</title>
+    <!-- Google Material Icons e Fonte Inter para visual limpo -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PAINEL DE CONTROLE DE DEMONSTRAÇÃO (Para os jurados do Hackathon) -->
+    <div class="demo-panel">
+        <div class="demo-header">
+            <span class="material-icons">architecture</span>
+            <h3>Modo Hackathon</h3>
+        </div>
+        <p class="demo-desc">Alterne entre os cenários para validar os fluxos da aplicação:</p>
+        <div class="demo-scenarios">
+            <button class="demo-btn active" id="demo-c1" onclick="selectScenario(1)">🚜 Cenário 1: CAR Em Análise</button>
+            <button class="demo-btn" id="demo-c2" onclick="selectScenario(2)">🌳 Cenário 2: Pendência de APP</button>
+            <button class="demo-btn" id="demo-c3" onclick="selectScenario(3)">📄 Cenário 3: Regularizado</button>
+            <button class="demo-btn" id="demo-c4" onclick="selectScenario(4)">👩‍💼 Cenário 4: Visão da Analista</button>
+        </div>
+    </div>
+
+    <!-- MOCKUP DO DISPOSITIVO MÓVEL -->
+    <div class="phone-wrapper">
+        <div class="phone-container">
+            
+            <!-- TELA 1: SPLASH SCREEN -->
+            <section id="screen-splash" class="app-screen active">
+                <div class="splash-content">
+                    <div class="logo-box">
+                        <h1 class="brand-logo">Siscar<span>+</span></h1>
+                        <p class="brand-sub">Simplificando o CAR</p>
+                    </div>
+                    <div class="mascote-box">
+                        <div class="mascote-avatar large animate-pop">🐔</div>
+                        <div class="speech-bubble">Olá! Sou a <strong>Cisca</strong>, sua assistente da terra!</div>
+                    </div>
+                    <p class="tagline">"Traduzindo a legislação para quem vive da terra."</p>
+                    <button class="btn btn-primary w-100" onclick="changeScreen('screen-login')">Entrar</button>
+                </div>
+            </section>
+
+            <!-- TELA 2: LOGIN -->
+            <section id="screen-login" class="app-screen">
+                <div class="screen-header">
+                    <button class="btn-icon" onclick="changeScreen('screen-splash')"><span class="material-icons">arrow_back</span></button>
+                    <h2>Acesse sua conta</h2>
+                </div>
+                <div class="screen-body padding-m">
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-icons">badge</span>
+                            <input type="text" placeholder="000.000.000-00" value="123.456.789-00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Número do CAR</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-icons">landscape</span>
+                            <input type="text" placeholder="UF-XXXXXXX-XXXX..." value="GO-5200602-A1B2">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100" onclick="performLogin()">Entrar</button>
+                    <div class="govbr-divider">ou entre com</div>
+                    <button class="btn btn-govbr w-100"><img src="https://www.gov.br/images/logo-govbr.png" alt="gov.br" style="height:18px;"> gov.br</button>
+                </div>
+            </section>
+
+            <!-- CORE DA APLICAÇÃO (TELAS COM BARRA SUPERIOR E INFERIOR) -->
+            <div id="app-core" class="hidden">
+                <header class="app-bar">
+                    <div class="app-bar-left">
+                        <button id="btn-global-back" class="btn-icon hidden" onclick="goBackToDashboard()"><span class="material-icons">arrow_back</span></button>
+                        <h2 id="app-bar-title">Siscar+</h2>
+                    </div>
+                    <button class="btn-icon" onclick="triggerNotification()"><span class="material-icons">notifications</span></button>
+                </header>
+
+                <main class="app-content">
+                    
+                    <!-- SUB-TELA: DASHBOARD -->
+                    <div id="sub-dashboard" class="sub-screen active">
+                        <div class="welcome-section padding-m">
+                            <h3 id="dash-greeting">Olá, Seu Raimundo!</h3>
+                            <p class="text-muted">Veja como está a saúde do seu cadastro:</p>
+                        </div>
+
+                        <!-- Card Principal da Propriedade -->
+                        <div class="card card-hero">
+                            <div class="card-hero-header">
+                                <div>
+                                    <span class="label-mini">Propriedade</span>
+                                    <h4 id="dash-prop-name">Sítio Boa Vista</h4>
+                                    <p id="dash-prop-meta" class="text-small"><span class="material-icons text-small">place</span> 48 hectares • Rio Verde - GO</p>
+                                </div>
+                                <div class="mascote-avatar medium">🐔</div>
+                            </div>
+                            
+                            <div class="status-box">
+                                <span>Situação:</span>
+                                <span id="dash-status-badge" class="badge badge-warning">Em análise</span>
+                            </div>
+
+                            <div id="dash-pendencia-box" class="pendencia-strip text-warning" onclick="switchSubScreen('sub-explique')">
+                                <span class="material-icons">error_outline</span>
+                                <span id="dash-pendencia-text">Você possui 1 recomendação da Cisca</span>
+                                <span class="material-icons space-left">chevron_right</span>
+                            </div>
+                        </div>
+
+                        <!-- Botão de Ação Destacado -->
+                        <div class="padding-h-m">
+                            <button class="btn btn-primary w-100 btn-pulse" onclick="switchSubScreen('sub-explique')">
+                                <span class="material-icons">psychology</span> Explique minha situação
+                            </button>
+                        </div>
+
+                        <!-- Grid de Navegação -->
+                        <div class="menu-grid padding-m">
+                            <div class="grid-item" onclick="switchSubScreen('sub-documentos')">
+                                <span class="material-icons text-purple">folder</span>
+                                <p>Documentos</p>
+                            </div>
+                            <div class="grid-item" onclick="switchSubScreen('sub-timeline')">
+                                <span class="material-icons text-orange">route</span>
+                                <p>Passos do CAR</p>
+                            </div>
+                            <div class="grid-item" onclick="switchSubScreen('sub-aprender')">
+                                <span class="material-icons text-blue">local_library</span>
+                                <p>Aprender</p>
+                            </div>
+                            <div class="grid-item" onclick="openChatContext('ajuda')">
+                                <span class="material-icons text-green">forum</span>
+                                <p>Falar com a Cisca</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: EXPLIQUE MINHA SITUAÇÃO -->
+                    <div id="sub-explique" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Minha Situação Explicada</h3>
+                            
+                            <div class="map-mockup">
+                                <div class="map-layer boundary"></div>
+                                <div id="map-river-line" class="map-layer river"></div>
+                                <div id="map-app-zone" class="map-layer app-zone"></div>
+                                <div class="map-tag tag-prop">Sítio Boa Vista</div>
+                                <div id="map-tag-app" class="map-tag tag-app">APP a recuperar</div>
+                                <div class="map-legend">
+                                    <span><i class="bg-blue"></i> Córrego</span>
+                                    <span><i class="bg-orange"></i> APP</span>
+                                </div>
+                            </div>
+
+                            <div class="cisca-speech-card">
+                                <div class="mascote-avatar small">🐔</div>
+                                <div class="speech-text" id="explique-text-container">
+                                    <!-- Dinâmico -->
+                                </div>
+                            </div>
+
+                            <div class="action-footer-buttons">
+                                <button class="btn btn-secondary" onclick="switchSubScreen('sub-timeline')">Ver Linha do Tempo</button>
+                                <button class="btn btn-primary" id="btn-action-regularizar" onclick="switchSubScreen('sub-regularizar')">Como Regularizar?</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: COMO REGULARIZAR -->
+                    <div id="sub-regularizar" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Passo a Passo da Regularização</h3>
+                            <p class="text-muted">A Cisca separou as tarefas práticas para você organizar na sua propriedade:</p>
+                            
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <div class="step-info">
+                                    <h4>Isolamento da Área</h4>
+                                    <p>Coloque cercas simples ao redor do córrego para que os animais da fazenda não pisem nos brotos novos.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <div class="step-info">
+                                    <h4>Plantio ou Regeneração</h4>
+                                    <p>Plante mudas de árvores nativas da região ou deixe a própria natureza brotar se o solo estiver bom.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <div class="step-info">
+                                    <h4>Assinatura do Compromisso (PRADA)</h4>
+                                    <p>Firmar o compromisso digital de que você cuidará dessa fatia de terra nos próximos anos.</p>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary w-100" style="margin-top:20px;" onclick="openChatContext('PRADA')">Tirar Dúvidas no Chat</button>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: TIMELINE -->
+                    <div id="sub-timeline" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Fluxo do seu Cadastro</h3>
+                            <div class="timeline-wrapper">
+                                <div class="tl-item done">
+                                    <div class="tl-node"><span class="material-icons">check</span></div>
+                                    <div class="tl-content"><h4>Cadastro Enviado</h4><p>Recebido e protocolado com sucesso.</p></div>
+                                </div>
+                                <div class="tl-item" id="tl-node-analise">
+                                    <div class="tl-node"></div>
+                                    <div class="tl-content"><h4>Análise Técnica</h4><p>O analista do Estado está conferindo os mapas.</p></div>
+                                </div>
+                                <div class="tl-item" id="tl-node-pendencia">
+                                    <div class="tl-node"></div>
+                                    <div class="tl-content"><h4>Ajustes e Pendências</h4><p>Correções solicitadas em linguagem clara.</p></div>
+                                </div>
+                                <div class="tl-item" id="tl-node-concluido">
+                                    <div class="tl-node"></div>
+                                    <div class="tl-content"><h4>Concluído</h4><p>Imóvel 100% regularizado e apto para benefícios.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: DOCUMENTOS -->
+                    <div id="sub-documentos" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Meus Documentos</h3>
+                            <div class="doc-list">
+                                <div class="doc-item">
+                                    <span class="material-icons text-green">verified</span>
+                                    <div class="doc-meta"><h4>Identidade do Produtor</h4><p class="text-green">✔ Confirmado</p></div>
+                                </div>
+                                <div class="doc-item">
+                                    <span class="material-icons text-green">verified</span>
+                                    <div class="doc-meta"><h4>Escritura/Posse da Terra</h4><p class="text-green">✔ Validado</p></div>
+                                </div>
+                                <div class="doc-item">
+                                    <span class="material-icons text-green">verified</span>
+                                    <div class="doc-meta"><h4>Planta Georreferenciada</h4><p class="text-green">✔ Recebido</p></div>
+                                </div>
+                                <div class="doc-item" id="doc-item-compromisso">
+                                    <span class="material-icons text-orange" id="doc-compromisso-icon">hourglass_empty</span>
+                                    <div class="doc-meta"><h4 id="doc-compromisso-title">Termo de Compromisso</h4><p id="doc-compromisso-status" class="text-orange">Pendente</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: APRENDER -->
+                    <div id="sub-aprender" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Aprender com a Cisca 📚</h3>
+                            <div class="lesson-grid">
+                                <div class="lesson-card" onclick="triggerModal('O que é APP?', 'A APP (Área de Preservação Permanente) é aquela beirada de rio, nascente ou topo de morro que a gente não pode mexer. Ela funciona como os cílios dos nossos olhos: protege a água para ela não secar nem encher de terra.')">
+                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                    <h4>O que é APP?</h4>
+                                </div>
+                                <div class="lesson-card" onclick="triggerModal('O que é Reserva Legal?', 'Reserva Legal é um pedaço de mata nativa que todo sítio tem que ter guardado. Dependendo do seu estado, varia de 20% a 80%. Você pode passear com os animais ou tirar lenha seca de forma sustentável, contanto que mantenha a floresta viva.')">
+                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                    <h4>O que é Reserva Legal?</h4>
+                                </div>
+                                <div class="lesson-card" onclick="triggerModal('Área Consolidada', 'Área Consolidada é aquele pedaço de terra que você já usava com trator, pasto ou benfeitoria antes de 22 de julho de 2008. A lei dá um desconto para quem já trabalhava lá antes dessa data!')">
+                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                    <h4>O que é Área Consolidada?</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: CHAT COM A CISCA -->
+                    <div id="sub-chat" class="sub-screen">
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chat-messages-box">
+                                <!-- Preenchido dinamicamente -->
+                            </div>
+                            <div class="chat-tags-wrapper">
+                                <button onclick="sendQuickMessage('O que é APP?')">O que é APP?</button>
+                                <button onclick="sendQuickMessage('Tenho pendências?')">Tenho pendências?</button>
+                                <button onclick="sendQuickMessage('E o crédito rural?')">Crédito Rural</button>
+                            </div>
+                            <div class="chat-input-bar">
+                                <input type="text" id="chat-input" placeholder="Pergunte algo à Cisca...">
+                                <button class="btn-send" onclick="submitChatMessage()"><span class="material-icons">mic</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TELA: PERFIL -->
+                    <div id="sub-perfil" class="sub-screen">
+                        <div class="padding-m">
+                            <h3>Perfil Cadastral</h3>
+                            <div class="profile-summary">
+                                <div class="mascote-avatar large">🧑‍🌾</div>
+                                <h4 id="perf-name">Seu Raimundo Nonato</h4>
+                                <p class="text-muted" id="perf-role">Produtor Familiar</p>
+                            </div>
+                            <ul class="profile-details">
+                                <li><strong>Propriedade:</strong> <span id="perf-prop">Sítio Boa Vista</span></li>
+                                <li><strong>Localidade:</strong> <span id="perf-city">Rio Verde - GO</span></li>
+                                <li><strong>Módulo Fiscal:</strong> 1.2 MF</li>
+                                <li><strong>Sistema Integrado:</strong> SICAR Nacional</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </main>
+
+                <!-- ABA DE NAVEGAÇÃO INFERIOR -->
+                <nav class="bottom-nav">
+                    <button class="nav-item active" id="nav-dash" onclick="switchSubScreen('sub-dashboard')">
+                        <span class="material-icons">home</span><span>Início</span>
+                    </button>
+                    <button class="nav-item" id="nav-time" onclick="switchSubScreen('sub-timeline')">
+                        <span class="material-icons">route</span><span>Passos</span>
+                    </button>
+                    <button class="nav-item" id="nav-chat" onclick="switchSubScreen('sub-chat')">
+                        <span class="material-icons">forum</span><span>Cisca Chat</span>
+                    </button>
+                    <button class="nav-item" id="nav-perf" onclick="switchSubScreen('sub-perfil')">
+                        <span class="material-icons">person</span><span>Perfil</span>
+                    </button>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DIÁLOGOS E NOTIFICAÇÕES GLOBAIS (TOASTS E MODAIS) -->
+    <div id="custom-modal" class="modal-overlay hidden">
+        <div class="modal-box animate-pop">
+            <div class="modal-header">
+                <h4 id="modal-title">Título</h4>
+                <button class="btn-icon" onclick="closeModal()"><span class="material-icons">close</span></button>
+            </div>
+            <div class="modal-body" id="modal-body">Conteúdo</div>
+            <button class="btn btn-primary w-100" onclick="closeModal()">Entendi!</button>
+        </div>
+    </div>
+
+    <div id="custom-toast" class="toast-box hidden" onclick="handleToastNavigation()">
+        <span class="material-icons">notifications_active</span>
+        <div>
+            <h5 id="toast-title">Aviso Importante</h5>
+            <p id="toast-body" class="text-small">Toque para verificar.</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT DA APLICAÇÃO -->
+    <script src="script.js"></script>
+</body>
+</html>
