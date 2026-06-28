@@ -95,7 +95,7 @@ O protótipo conta com um **Controlador de Cenários** integrado para demonstrar
 ├── index.html          # Estrutura de telas do smartphone e painel do hackathon
 ├── styles.css          # Estilização completa, variáveis de cor e animações
 ├── script.js           # Lógica dos cenários, mensagens da Cisca e interações
-├── dados.json          # Dados estruturados com as falas da Cisca e cenários
+├── perguntas.json          # Dados estruturados com as falas da Cisca e cenários
 └── logo.png            # Identidade visual oficial da marca
 
 ---
