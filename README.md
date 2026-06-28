@@ -70,7 +70,9 @@ Para garantir máxima performance, leveza de carregamento em redes móveis rurai
 *   **HTML5** - Estruturação semântica e acessível.
 *   **CSS3** - Design responsivo (estilo *Mobile-First*) com variáveis customizadas para Modo Escuro/Painéis.
 *   **JavaScript (Vanilla)** - Motor de estados lógico, simulação do fluxo de IA e reatividade sem frameworks pesados.
+* **JSON (JavaScript Object Notation)** - Modelagem e armazenamento dos dados estruturados (diálogos da Cisca e cenários de testes), simulando o comportamento de uma API real de forma estática.
 *   **Google Material Icons & Inter Font** - Identidade visual moderna e legibilidade garantida.
+* **Inteligência Artificial (Refinamento e Geração de Imagens)** - Utilização pontual de modelos de linguagem (GPT e Gemini) para suporte no refinamento e concepção de modelos generativos como ferramentas auxiliares na geração dos elementos visuais e identidade da mascote.
 
 ---
 
@@ -84,6 +86,17 @@ O protótipo conta com um **Controlador de Cenários** integrado para demonstrar
 | **2. Pendência de APP** | Tradução visual e textual de uma irregularidade real. | Engajamento do produtor em resolver o problema. |
 | **3. Regularizado** | Conexão do sucesso ambiental com o ganho financeiro. | Estímulo ao Crédito Rural facilitado. |
 | **4. Visão da Analista** | Métricas de impacto para o Órgão Ambiental do Estado. | Redução drástica nas filas de atendimento físico. |
+
+---
+
+## 📂 Estrutura do Projeto
+
+```Project
+├── index.html          # Estrutura de telas do smartphone e painel do hackathon
+├── styles.css          # Estilização completa, variáveis de cor e animações
+├── script.js           # Lógica dos cenários, mensagens da Cisca e interações
+├── dados.json          # Dados estruturados com as falas da Cisca e cenários
+└── logo.png            # Identidade visual oficial da marca
 
 ---
 
