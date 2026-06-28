@@ -25,7 +25,7 @@ Preparamos o nosso Pitch comercial e duas demonstrações práticas em vídeo pa
 
 A identidade do **Siscar+** foi planejada para transmitir **confiança, sustentabilidade e proximidade com o produtor do campo**. Como ilustrado em logo_3.png, a marca equilibra o rigor da preservação ambiental com o calor e a energia do ecossistema agrícola de forma moderna e humana.
 
-![Logo Siscar+](logo_3.png)
+![Logo Siscar+](logo.png)
 
 ### 🎨 Paleta de Cores Oficial
 
