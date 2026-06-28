@@ -53,35 +53,32 @@ const scenarios = {
 };
 
 // ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA (CARREGADA VIA JSON)
+// CENTRAL DE RESPOSTAS DA CISCA (LOCAL + FETCH)
 // ==========================================
-let ciscaKnowledge = {};
+// Iniciamos direto com as respostas locais para que NADA dependa do tempo de resposta do servidor externo
+let ciscaKnowledge = {
+    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
+    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
+    "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
+    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
+    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
+    "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
+    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
+    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!"
+};
 
-// Função assíncrona com proteção contra falhas de rede no GitHub Pages
+// Função para tentar atualizar a base local via JSON externo em segundo plano
 async function carregarConhecimentoCisca() {
     try {
         const resposta = await fetch('./perguntas.json');
-        
-        if (!resposta.ok) {
-            throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`);
+        if (resposta.ok) {
+            const dadosExternos = await resposta.json();
+            // Une os dados, priorizando as atualizações do JSON caso existam
+            ciscaKnowledge = { ...ciscaKnowledge, ...dadosExternos };
+            console.log("Prosa da Cisca sincronizada com o arquivo JSON com sucesso!");
         }
-
-        ciscaKnowledge = await resposta.json();
-        console.log("Prosa da Cisca carregada com sucesso do JSON externo!");
     } catch (erro) {
-        console.warn("GitHub Pages/Rede falhou ao carregar JSON. Ativando banco de dados local de emergência para o pitch!", erro);
-        
-        // BANCO DE DADOS LOCAL DE SEGURANÇA (Garante as respostas cruciais mesmo se o fetch falhar)
-        ciscaKnowledge = {
-            "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
-            "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
-            "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
-            "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
-            "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
-            "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
-            "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
-            "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!"
-        };
+        console.warn("Utilizando banco de dados local nativo (proteção ativa para o pitch).", erro);
     }
 }
 
@@ -224,16 +221,19 @@ function submitChatMessage() {
         if (l) l.remove();
 
         let reply = "";
-        const lower = val.toLowerCase();
+        
+        // Trata o texto: remove pontuação comum (?, !, ., ,) para evitar quebras de correspondência
+        const lowerCleaned = val.toLowerCase().replace(/[?!.,\/\\#$%\^&\*;:{}=\-_`~()]/g, "").trim();
 
-        // Procura por palavras-chave no dicionário amigável
+        // Faz a varredura inteligente pelas chaves do dicionário
         for (const k in ciscaKnowledge) {
-            if (lower.includes(k)) {
+            if (lowerCleaned.includes(k)) {
                 reply = ciscaKnowledge[k];
                 break;
             }
         }
 
+        // Se o usuário digitou algo aleatório que não mapeamos, usa o fallback de evolução da IA
         if (!reply) {
             reply = "Essa funcionalidade de IA ainda está em evolução no protótipo do Siscar+. Na versão completa do produto, nossa Inteligência Artificial lerá o Código Florestal e os Manuais Oficiais para te responder com total certeza técnica!";
         }
@@ -264,7 +264,7 @@ function closeModal() {
 }
 
 // GESTÃO DE TOAST NOTIFICATION
-function triggerNotification(title = "Alerta Siscar+", msg = "Seu cadastro possui atualizações pendentes.") {
+function triggerNotification(title = "Alerta Siscar+", msg = "Seu cadastro possui updates pendentes.") {
     document.getElementById('toast-title').innerText = title;
     document.getElementById('toast-body').innerText = msg;
     const t = document.getElementById('custom-toast');
@@ -282,8 +282,8 @@ document.getElementById('chat-input').addEventListener('keypress', function (e) 
     if (e.key === 'Enter') submitChatMessage();
 });
 
-// Inicialização Padrão
+// Inicialização Padrão Instantânea
 window.onload = () => {
-    selectScenario(1);            // 1º: Monta a interface na hora (Zero delay visual)
-    carregarConhecimentoCisca();  // 2º: Puxa o JSON em segundo plano (Sem travar a tela)
+    selectScenario(1);            // 1º: Monta a interface na hora (Sem travar o usuário)
+    carregarConhecimentoCisca();  // 2º: Tenta puxar o JSON externo em background (Segurança nativa já ativa)
 };
