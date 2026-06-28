@@ -24,25 +24,37 @@ body {
     background: #111424;
     background-image: radial-gradient(#1a233d 1px, transparent 1px);
     background-size: 24px 24px;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; color: var(--dark); overflow: hidden; padding: 20px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 60px; /* Mantém o espaçamento confortável entre o painel e o mockup */
+    min-height: 100vh; 
+    color: var(--dark); 
+    overflow: hidden; 
+    padding: 20px;
 }
 
 /* ==========================================
    PAINEL DE JURADOS DO HACKATHON
    ========================================== */
 .demo-panel {
-    position: fixed; left: 40px; top: 50%; transform: translateY(-50%);
-    width: 320px; background: rgba(255, 255, 255, 0.95); padding: 24px;
-    border-radius: 20px; box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-    z-index: 100; border-left: 6px solid var(--primary);
+    /* REMOVIDO: position fixed e transform para não quebrar o alinhamento flexbox do body */
+    width: 320px; 
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 24px;
+    border-radius: 20px; 
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    z-index: 100; 
+    border-left: 6px solid var(--primary);
+    flex-shrink: 0; /* Impede que o painel amasse em resoluções menores */
 }
 .demo-header { display: flex; align-items: center; gap: 8px; color: var(--primary); margin-bottom: 12px; }
-.demo-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.demo-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.4; }
 .demo-scenarios { display: flex; flex-direction: column; gap: 10px; }
 .demo-btn {
     background: #FFF; border: 1px solid #DDD; padding: 12px; border-radius: 12px;
     text-align: left; font-size: 13px; cursor: pointer; transition: all 0.2s ease; font-weight: 500;
+    width: 100%;
 }
 .demo-btn:hover { background: #F0F2F5; }
 .demo-btn.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
@@ -53,8 +65,8 @@ body {
 .phone-wrapper {
     position: relative; 
     width: 380px; 
-    height: 85vh;            /* Usa 85% da altura visível da tela */
-    min-height: 600px;        /* Evita que ele amasse em telas minúsculas */
+    height: 85vh;             /* Usa 85% da altura visível da tela */
+    min-height: 640px;        /* Evita que ele amasse em telas minúsculas */
     max-height: 820px;        /* Limite máximo para não esticar demais */
     background: #000; 
     border-radius: 40px; 
@@ -122,7 +134,7 @@ body {
 .btn-primary:hover { background: #256428; }
 .btn-secondary { background: #E0E0E0; color: var(--dark); }
 .btn-govbr { background: #0047B6; color: white; font-weight: 500; }
-.btn-icon { background: none; border: none; cursor: pointer; color: inherit; }
+.btn-icon { background: none; border: none; cursor: pointer; color: inherit; display: flex; align-items: center; justify-content: center; }
 
 .btn-pulse { animation: pulseGlow 2s infinite; }
 @keyframes pulseGlow {
@@ -151,19 +163,18 @@ body {
 /* LOGIN SCREEN */
 .screen-header { padding: 20px; display: flex; align-items: center; gap: 12px; background: var(--white); border-bottom: 1px solid #EEE; }
 .form-group { margin-bottom: 18px; }
-.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; text-align: left; }
 .input-icon-wrapper { position: relative; display: flex; align-items: center; }
 .input-icon-wrapper span { position: absolute; left: 14px; color: var(--muted); }
 .input-icon-wrapper input { width: 100%; padding: 14px 14px 14px 44px; border: 1px solid #DDD; border-radius: 12px; font-size: 15px; }
 .govbr-divider { text-align: center; margin: 24px 0; font-size: 12px; color: var(--muted); position: relative; }
 
 /* ESTRUTURA INTERNA (CORE) */
-.app-bar { background: var(--primary); color: var(--white); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+.app-bar { background: var(--primary); color: var(--white); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; height: 56px; }
 .app-bar-left { display: flex; align-items: center; gap: 12px; }
-.app-content { flex: 1; position: relative; overflow: hidden; background: var(--neutral-bg); display: flex; flex-direction: column; }
 
 /* CARDS NO DASHBOARD */
-.card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+.card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; text-align: left; }
 .card-hero { margin: 16px 20px; border-left: 5px solid var(--accent); }
 .card-hero-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
 .label-mini { font-size: 11px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; }
@@ -176,12 +187,16 @@ body {
 .pendencia-strip { background: var(--accent-light); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; cursor: pointer; }
 .space-left { margin-left: auto; }
 
-/* GRID DE ATALHOS */
-.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.grid-item { background: var(--white); padding: 16px; border-radius: 12px; text-align: center; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s; }
-.grid-item:hover { transform: translateY(-2px); }
-.grid-item span { font-size: 32px; margin-bottom: 6px; }
-.grid-item p { font-size: 13px; font-weight: 600; }
+/* GRID DE ATALHOS - REFORMULADO COMO BOTÕES */
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; border: none; background: none; }
+.grid-item { 
+    background: var(--white); padding: 16px; border-radius: 12px; text-align: center; 
+    box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s, background-color 0.2s; 
+    border: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.grid-item:hover { transform: translateY(-2px); background-color: #FAFAFA; }
+.grid-item span { font-size: 32px; margin-bottom: 6px; display: block; }
+.grid-item p { font-size: 13px; font-weight: 600; color: var(--dark); }
 
 .text-purple { color: #8E24AA; } .text-orange { color: var(--accent); }
 .text-blue { color: #1E88E5; } .text-green { color: var(--primary); }
@@ -201,25 +216,25 @@ body {
 .bg-blue { background: #2196F3; } .bg-orange { background: var(--accent); }
 
 /* BALÃO CISCA EXPLICATIVO */
-.cisca-speech-card { display: flex; gap: 12px; background: var(--white); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 16px; }
+.cisca-speech-card { display: flex; gap: 12px; background: var(--white); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 16px; text-align: left; }
 .speech-text p { font-size: 13.5px; line-height: 1.5; margin-bottom: 8px; }
 
 .action-footer-buttons { display: flex; gap: 12px; }
 .action-footer-buttons .btn { flex: 1; }
 
 /* LISTAS E ETAPAS */
-.step-card { display: flex; gap: 14px; background: white; padding: 14px; border-radius: 12px; margin-bottom: 10px; box-shadow: var(--shadow); }
+.step-card { display: flex; gap: 14px; background: white; padding: 14px; border-radius: 12px; margin-bottom: 10px; box-shadow: var(--shadow); text-align: left; }
 .step-number { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
 .step-info h4 { font-size: 14px; margin-bottom: 2px; }
 .step-info p { font-size: 12px; color: var(--muted); }
 
 .doc-list { display: flex; flex-direction: column; gap: 10px; }
-.doc-item { display: flex; align-items: center; gap: 14px; background: white; padding: 14px; border-radius: 12px; box-shadow: var(--shadow); }
+.doc-item { display: flex; align-items: center; gap: 14px; background: white; padding: 14px; border-radius: 12px; box-shadow: var(--shadow); text-align: left; }
 .doc-meta h4 { font-size: 14px; }
 .doc-meta p { font-size: 11px; font-weight: 600; margin-top: 2px; }
 
 /* LINHA DO TEMPO */
-.timeline-wrapper { position: relative; padding-left: 24px; margin-top: 10px; }
+.timeline-wrapper { position: relative; padding-left: 24px; margin-top: 10px; text-align: left; }
 .timeline-wrapper::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: #DDD; }
 .tl-item { position: relative; margin-bottom: 24px; display: flex; gap: 16px; }
 .tl-node { width: 16px; height: 16px; background: white; border: 3px solid #CCC; border-radius: 50%; z-index: 2; margin-top: 4px; display: flex; align-items: center; justify-content: center; }
@@ -232,16 +247,16 @@ body {
 .tl-item.active .tl-node { background: var(--accent); border-color: var(--accent); }
 
 /* CHAT ESTILO WHATSAPP */
-.chat-container { display: flex; flex-direction: column; height: 600px; background: #E5DDD5; }
+.chat-container { display: flex; flex-direction: column; height: 100%; background: #E5DDD5; }
 .chat-messages { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-.msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13.5px; line-height: 1.4; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13.5px; line-height: 1.4; box-shadow: 0 1px 2px rgba(0,0,0,0.1); text-align: left; }
 .msg.received { background: white; align-self: flex-start; border-top-left-radius: 2px; }
 .msg.sent { background: #DCF8C6; align-self: flex-end; border-top-right-radius: 2px; }
 .chat-tags-wrapper { display: flex; gap: 8px; padding: 8px; overflow-x: auto; background: #EEE; }
 .chat-tags-wrapper button { background: white; border: 1px solid #CCC; border-radius: 16px; padding: 6px 12px; font-size: 12px; white-space: nowrap; cursor: pointer; }
-.chat-input-bar { padding: 10px; background: #F0F0F0; display: flex; gap: 10px; }
+.chat-input-bar { padding: 10px; background: #F0F0F0; display: flex; gap: 10px; align-items: center; }
 .chat-input-bar input { flex: 1; border: none; padding: 12px; border-radius: 24px; outline: none; }
-.btn-send { background: var(--primary); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.btn-send { background: var(--primary); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
 
 /* ELEMENTOS DE CARREGAMENTO INTELIGENTE */
 .typing { display: flex; gap: 4px; padding: 8px; background: white; border-radius: 8px; align-self: flex-start; }
@@ -251,19 +266,19 @@ body {
 @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
 /* ABAS INFERIORES */
-.bottom-nav { position: absolute; bottom: 0; left:0; width:100%; height:64px; background: var(--white); border-top: 1px solid #E0E0E0; display: flex; justify-content: space-around; align-items: center; }
+.bottom-nav { position: absolute; bottom: 0; left:0; width:100%; height:64px; background: var(--white); border-top: 1px solid #E0E0E0; display: flex; justify-content: space-around; align-items: center; z-index: 20; }
 .nav-item { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: #777; font-size: 11px; cursor: pointer; font-weight: 500; }
 .nav-item.active { color: var(--primary); font-weight: 700; }
 
 /* MINI AULAS */
 .lesson-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-.lesson-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; }
+.lesson-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; text-align: left; }
 .video-placeholder { background: #37474F; height: 100px; display: flex; align-items: center; justify-content: center; color: #FFF59D; font-size: 13px; font-weight: 600; }
 .lesson-card h4 { padding: 12px; font-size: 14px; }
 
 /* PERFIL */
 .profile-summary { text-align: center; margin-bottom: 20px; }
-.profile-details { list-style: none; background: white; border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+.profile-details { list-style: none; background: white; border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: left; }
 .profile-details li { padding: 10px 0; border-bottom: 1px solid #EEE; font-size: 13.5px; display: flex; justify-content: space-between; }
 .profile-details li:last-child { border: none; }
 
@@ -274,18 +289,49 @@ body {
 .modal-body { font-size: 14px; line-height: 1.5; margin-bottom: 18px; color: var(--muted); }
 
 /* TOAST FLUTUANTE */
-.toast-box { position: absolute; top: 70px; left: 16px; right: 16px; background: #323232; color: white; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; z-index: 200; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: pop 0.2s forwards; }
+.toast-box { position: absolute; top: 70px; left: 16px; right: 16px; background: #323232; color: white; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; z-index: 200; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: pop 0.2s forwards; text-align: left; }
 
-/* RESPONSIVIDADE DO MODAL PARA HACKATHON */
-@media(max-width: 800px) {
-    body { flex-direction: column; overflow-y: auto; padding: 10px; }
-    .demo-panel { position: static; transform: none; width: 100%; max-width: 380px; margin-bottom: 16px; box-shadow: none; }
-    .phone-wrapper { width: 100%; max-width: 380px; height: 80vh; min-height: 580px; }
+/* ==========================================
+   MECANISMO DE RESPONSIVIDADE E ADAPTAÇÃO DE ZOOM
+   ========================================== */
+/* Trata telas onde a largura total é insuficiente para manter os dois lados em 100% */
+@media (max-width: 860px) {
+    body { 
+        flex-direction: column; 
+        overflow-y: auto; 
+        padding: 40px 20px;
+        gap: 30px;
+    }
+    .demo-panel { 
+        width: 100%; 
+        max-width: 380px; 
+    }
+    .phone-wrapper { 
+        width: 100%; 
+        max-width: 380px; 
+        height: 780px; 
+    }
 }
-/* Ajuste fino para telas de notebooks menores de mesa */
-@media(max-height: 800px) {
-    .phone-wrapper {
-        height: 90vh;
-        max-height: 700px;
+
+/* O Segredo do Zoom: Se a altura da tela for pequena (monitores comuns de notebooks), 
+   reduzimos a escala global do body sem quebrar as proporções internas */
+@media (min-width: 861px) and (max-height: 880px) {
+    body {
+        transform: scale(0.9);
+        transform-origin: center center;
+    }
+}
+
+@media (min-width: 861px) and (max-height: 760px) {
+    body {
+        transform: scale(0.8); /* Força o comportamento equivalente aos 80% do navegador de forma nativa */
+        transform-origin: center center;
+    }
+}
+
+@media (min-width: 861px) and (max-height: 660px) {
+    body {
+        transform: scale(0.7);
+        transform-origin: center center;
     }
 }
