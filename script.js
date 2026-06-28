@@ -53,18 +53,32 @@ const scenarios = {
 };
 
 // ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA)
+// CENTRAL DE RESPOSTAS DA CISCA (CARREGADA VIA JSON)
 // ==========================================
-const ciscaKnowledge = {
-    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
-    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
-    "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
-    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
-    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
-    "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
-    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
-    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!"
-};
+// Começa como um objeto vazio e será preenchido pelo fetch
+let ciscaKnowledge = {};
+
+// Função assíncrona para buscar as respostas no arquivo JSON
+async function carregarConhecimentoCisca() {
+    try {
+        const resposta = await fetch('perguntas.json');
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`);
+        }
+
+        // Guarda as respostas do JSON dentro da nossa variável
+        ciscaKnowledge = await resposta.json();
+        console.log("Prosa da Cisca carregada com sucesso do JSON!");
+    } catch (erro) {
+        console.error("Eita! Erro ao carregar perguntas.json da Cisca:", erro);
+        // Fallback de segurança para o chat não quebrar completamente se o JSON falhar
+        ciscaKnowledge = { "ajuda": "Não consegui prosa externa agora, meu filho." };
+    }
+}
+
+// Chamamos a função para rodar imediatamente assim que o script carregar
+carregarConhecimentoCisca();
 
 let activeScenario = 1;
 
