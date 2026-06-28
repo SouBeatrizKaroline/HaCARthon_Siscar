@@ -8,6 +8,8 @@
 Para testar a aplicação rodando em tempo real sem precisar baixar o código, acesse o link do protótipo funcional:
 👉 **[Demonstração Online - Siscar+](https://soubeatrizkaroline.github.io/HaCARthon_Ciscar/)**
 
+⚠️ **Nota sobre a Visualização do Protótipo:** Como o design foi projetado sob a filosofia *Mobile-First* (focado em dispositivos móveis) e está em fase de validação, caso você o acesse por um monitor ou tela de alta resolução, **pode ser necessário ajustar o zoom do seu navegador (para menos ou para mais)** para obter a melhor experiência de layout. Essa calibração de responsividade desktop será refinada e ajustada automaticamente nas próximas versões!
+
 ---
 
 ## 🐔 Conheça a Cisca!
