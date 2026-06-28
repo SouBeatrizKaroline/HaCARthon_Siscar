@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siscar+ | Inteligência Ambiental</title>
+    <title>Siscar+ | Inteligência Ambiental e Acessibilidade no CAR</title>
+    
     <!-- Google Material Icons e Fonte Inter para visual limpo -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,19 +13,20 @@
 <body>
 
     <!-- PAINEL DE CONTROLE DE DEMONSTRAÇÃO (Para os jurados do Hackathon) -->
-    <div class="demo-panel">
+    <!-- Adicionado aria-label para boa prática de acessibilidade -->
+    <nav class="demo-panel" aria-label="Painel de Avaliação do Hackathon">
         <div class="demo-header">
-            <span class="material-icons">architecture</span>
+            <span class="material-icons" aria-hidden="true">architecture</span>
             <h3>Modo Hackathon</h3>
         </div>
-        <p class="demo-desc">Alterne entre os cenários para validar os fluxos da aplicação:</p>
+        <p class="demo-desc">Alterne entre os cenários para validar os fluxos da aplicação em tempo real:</p>
         <div class="demo-scenarios">
             <button class="demo-btn active" id="demo-c1" onclick="selectScenario(1)">🚜 Cenário 1: CAR Em Análise</button>
             <button class="demo-btn" id="demo-c2" onclick="selectScenario(2)">🌳 Cenário 2: Pendência de APP</button>
             <button class="demo-btn" id="demo-c3" onclick="selectScenario(3)">📄 Cenário 3: Regularizado</button>
             <button class="demo-btn" id="demo-c4" onclick="selectScenario(4)">👩‍💼 Cenário 4: Visão da Analista</button>
         </div>
-    </div>
+    </nav>
 
     <!-- MOCKUP DO DISPOSITIVO MÓVEL -->
     <div class="phone-wrapper">
@@ -38,36 +40,37 @@
                         <p class="brand-sub">Simplificando o CAR</p>
                     </div>
                     <div class="mascote-box">
-                        <div class="mascote-avatar large animate-pop">🐔</div>
+                        <div class="mascote-avatar large animate-pop" role="img" aria-label="Mascote Cisca">🐔</div>
                         <div class="speech-bubble">Olá! Sou a <strong>Cisca</strong>, sua assistente da terra!</div>
                     </div>
                     <p class="tagline">"Traduzindo a legislação para quem vive da terra."</p>
-                    <button class="btn btn-primary w-100" onclick="changeScreen('screen-login')">Entrar</button>
+                    <button class="btn btn-primary w-100" onclick="changeScreen('screen-login')">Começar Agora</button>
                 </div>
             </section>
 
             <!-- TELA 2: LOGIN -->
             <section id="screen-login" class="app-screen">
                 <div class="screen-header">
-                    <button class="btn-icon" onclick="changeScreen('screen-splash')"><span class="material-icons">arrow_back</span></button>
+                    <button class="btn-icon" onclick="changeScreen('screen-splash')" aria-label="Voltar para tela inicial"><span class="material-icons">arrow_back</span></button>
                     <h2>Acesse sua conta</h2>
                 </div>
                 <div class="screen-body padding-m">
+                    <!-- Correção de acessibilidade: inputs agora têm ID e labels conectados por 'for' -->
                     <div class="form-group">
-                        <label>CPF</label>
+                        <label for="input-cpf">CPF</label>
                         <div class="input-icon-wrapper">
-                            <span class="material-icons">badge</span>
-                            <input type="text" placeholder="000.000.000-00" value="123.456.789-00">
+                            <span class="material-icons" aria-hidden="true">badge</span>
+                            <input type="text" id="input-cpf" inputmode="numeric" placeholder="000.000.000-00" value="123.456.789-00">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Número do CAR</label>
+                        <label for="input-car">Número do CAR</label>
                         <div class="input-icon-wrapper">
-                            <span class="material-icons">landscape</span>
-                            <input type="text" placeholder="UF-XXXXXXX-XXXX..." value="GO-5200602-A1B2">
+                            <span class="material-icons" aria-hidden="true">landscape</span>
+                            <input type="text" id="input-car" placeholder="UF-XXXXXXX-XXXX..." value="GO-5200602-A1B2">
                         </div>
                     </div>
-                    <button class="btn btn-primary w-100" onclick="performLogin()">Entrar</button>
+                    <button class="btn btn-primary w-100" onclick="performLogin()">Entrar no Cadastro</button>
                     <div class="govbr-divider">ou entre com</div>
                     <button class="btn btn-govbr w-100"><img src="https://www.gov.br/images/logo-govbr.png" alt="gov.br" style="height:18px;"> gov.br</button>
                 </div>
@@ -77,10 +80,10 @@
             <div id="app-core" class="hidden">
                 <header class="app-bar">
                     <div class="app-bar-left">
-                        <button id="btn-global-back" class="btn-icon hidden" onclick="goBackToDashboard()"><span class="material-icons">arrow_back</span></button>
+                        <button id="btn-global-back" class="btn-icon hidden" onclick="goBackToDashboard()" aria-label="Voltar ao início"><span class="material-icons">arrow_back</span></button>
                         <h2 id="app-bar-title">Siscar+</h2>
                     </div>
-                    <button class="btn-icon" onclick="triggerNotification()"><span class="material-icons">notifications</span></button>
+                    <button class="btn-icon" onclick="triggerNotification()" aria-label="Notificações"><span class="material-icons">notifications</span></button>
                 </header>
 
                 <main class="app-content">
@@ -98,49 +101,49 @@
                                 <div>
                                     <span class="label-mini">Propriedade</span>
                                     <h4 id="dash-prop-name">Sítio Boa Vista</h4>
-                                    <p id="dash-prop-meta" class="text-small"><span class="material-icons text-small">place</span> 48 hectares • Rio Verde - GO</p>
+                                    <p id="dash-prop-meta" class="text-small"><span class="material-icons text-small" aria-hidden="true">place</span> 48 hectares • Rio Verde - GO</p>
                                 </div>
-                                <div class="mascote-avatar medium">🐔</div>
+                                <div class="mascote-avatar medium" role="img" aria-label="Mascote Cisca">🐔</div>
                             </div>
                             
                             <div class="status-box">
-                                <span>Situação:</span>
+                                <span>Situação do CAR:</span>
                                 <span id="dash-status-badge" class="badge badge-warning">Em análise</span>
                             </div>
 
-                            <div id="dash-pendencia-box" class="pendencia-strip text-warning" onclick="switchSubScreen('sub-explique')">
-                                <span class="material-icons">error_outline</span>
+                            <div id="dash-pendencia-box" class="pendencia-strip text-warning" onclick="switchSubScreen('sub-explique')" role="button" tabindex="0">
+                                <span class="material-icons" aria-hidden="true">error_outline</span>
                                 <span id="dash-pendencia-text">Você possui 1 recomendação da Cisca</span>
-                                <span class="material-icons space-left">chevron_right</span>
+                                <span class="material-icons space-left" aria-hidden="true">chevron_right</span>
                             </div>
                         </div>
 
                         <!-- Botão de Ação Destacado -->
                         <div class="padding-h-m">
                             <button class="btn btn-primary w-100 btn-pulse" onclick="switchSubScreen('sub-explique')">
-                                <span class="material-icons">psychology</span> Explique minha situação
+                                <span class="material-icons" aria-hidden="true">psychology</span> Explique minha situação
                             </button>
                         </div>
 
                         <!-- Grid de Navegação -->
-                        <div class="menu-grid padding-m">
-                            <div class="grid-item" onclick="switchSubScreen('sub-documentos')">
-                                <span class="material-icons text-purple">folder</span>
+                        <nav class="menu-grid padding-m" aria-label="Menu principal">
+                            <div class="grid-item" onclick="switchSubScreen('sub-documentos')" role="button" tabindex="0">
+                                <span class="material-icons text-purple" aria-hidden="true">folder</span>
                                 <p>Documentos</p>
                             </div>
-                            <div class="grid-item" onclick="switchSubScreen('sub-timeline')">
-                                <span class="material-icons text-orange">route</span>
+                            <div class="grid-item" onclick="switchSubScreen('sub-timeline')" role="button" tabindex="0">
+                                <span class="material-icons text-orange" aria-hidden="true">route</span>
                                 <p>Passos do CAR</p>
                             </div>
-                            <div class="grid-item" onclick="switchSubScreen('sub-aprender')">
-                                <span class="material-icons text-blue">local_library</span>
+                            <div class="grid-item" onclick="switchSubScreen('sub-aprender')" role="button" tabindex="0">
+                                <span class="material-icons text-blue" aria-hidden="true">local_library</span>
                                 <p>Aprender</p>
                             </div>
-                            <div class="grid-item" onclick="openChatContext('ajuda')">
-                                <span class="material-icons text-green">forum</span>
+                            <div class="grid-item" onclick="openChatContext('ajuda')" role="button" tabindex="0">
+                                <span class="material-icons text-green" aria-hidden="true">forum</span>
                                 <p>Falar com a Cisca</p>
                             </div>
-                        </div>
+                        </nav>
                     </div>
 
                     <!-- SUB-TELA: EXPLIQUE MINHA SITUAÇÃO -->
@@ -148,7 +151,7 @@
                         <div class="padding-m">
                             <h3>Minha Situação Explicada</h3>
                             
-                            <div class="map-mockup">
+                            <div class="map-mockup" role="img" aria-label="Mapa ilustrativo mostrando as divisões da propriedade rural e zona de APP">
                                 <div class="map-layer boundary"></div>
                                 <div id="map-river-line" class="map-layer river"></div>
                                 <div id="map-app-zone" class="map-layer app-zone"></div>
@@ -161,7 +164,7 @@
                             </div>
 
                             <div class="cisca-speech-card">
-                                <div class="mascote-avatar small">🐔</div>
+                                <div class="mascote-avatar small" role="img" aria-label="Mascote Cisca">🐔</div>
                                 <div class="speech-text" id="explique-text-container">
                                     <!-- Dinâmico -->
                                 </div>
@@ -237,19 +240,19 @@
                             <h3>Meus Documentos</h3>
                             <div class="doc-list">
                                 <div class="doc-item">
-                                    <span class="material-icons text-green">verified</span>
+                                    <span class="material-icons text-green" aria-hidden="true">verified</span>
                                     <div class="doc-meta"><h4>Identidade do Produtor</h4><p class="text-green">✔ Confirmado</p></div>
                                 </div>
                                 <div class="doc-item">
-                                    <span class="material-icons text-green">verified</span>
+                                    <span class="material-icons text-green" aria-hidden="true">verified</span>
                                     <div class="doc-meta"><h4>Escritura/Posse da Terra</h4><p class="text-green">✔ Validado</p></div>
                                 </div>
                                 <div class="doc-item">
-                                    <span class="material-icons text-green">verified</span>
+                                    <span class="material-icons text-green" aria-hidden="true">verified</span>
                                     <div class="doc-meta"><h4>Planta Georreferenciada</h4><p class="text-green">✔ Recebido</p></div>
                                 </div>
                                 <div class="doc-item" id="doc-item-compromisso">
-                                    <span class="material-icons text-orange" id="doc-compromisso-icon">hourglass_empty</span>
+                                    <span class="material-icons text-orange" id="doc-compromisso-icon" aria-hidden="true">hourglass_empty</span>
                                     <div class="doc-meta"><h4 id="doc-compromisso-title">Termo de Compromisso</h4><p id="doc-compromisso-status" class="text-orange">Pendente</p></div>
                                 </div>
                             </div>
@@ -261,16 +264,16 @@
                         <div class="padding-m">
                             <h3>Aprender com a Cisca 📚</h3>
                             <div class="lesson-grid">
-                                <div class="lesson-card" onclick="triggerModal('O que é APP?', 'A APP (Área de Preservação Permanente) é aquela beirada de rio, nascente ou topo de morro que a gente não pode mexer. Ela funciona como os cílios dos nossos olhos: protege a água para ela não secar nem encher de terra.')">
-                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                <div class="lesson-card" onclick="triggerModal('O que é APP?', 'A APP (Área de Preservação Permanente) é aquela beirada de rio, nascente ou topo de morro que a gente não pode mexer. Ela funciona como os cílios dos nossos olhos: protege a água para ela não secar nem encher de terra.')" role="button" tabindex="0">
+                                    <div class="video-placeholder"><span>▶ Ouvir Explicação</span></div>
                                     <h4>O que é APP?</h4>
                                 </div>
-                                <div class="lesson-card" onclick="triggerModal('O que é Reserva Legal?', 'Reserva Legal é um pedaço de mata nativa que todo sítio tem que ter guardado. Dependendo do seu estado, varia de 20% a 80%. Você pode passear com os animais ou tirar lenha seca de forma sustentável, contanto que mantenha a floresta viva.')">
-                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                <div class="lesson-card" onclick="triggerModal('O que é Reserva Legal?', 'Reserva Legal é um pedaço de mata nativa que todo sítio tem que ter guardado. Dependendo do seu estado, varia de 20% a 80%. Você pode passear com os animais ou tirar lenha seca de forma sustentável, contanto que mantenha a floresta viva.')" role="button" tabindex="0">
+                                    <div class="video-placeholder"><span>▶ Ouvir Explicação</span></div>
                                     <h4>O que é Reserva Legal?</h4>
                                 </div>
-                                <div class="lesson-card" onclick="triggerModal('Área Consolidada', 'Área Consolidada é aquele pedaço de terra que você já usava com trator, pasto ou benfeitoria antes de 22 de julho de 2008. A lei dá um desconto para quem já trabalhava lá antes dessa data!')">
-                                    <div class="video-placeholder"><span>▶ Assistir Aula</span></div>
+                                <div class="lesson-card" onclick="triggerModal('Área Consolidada', 'Área Consolidada é aquele pedaço de terra que você já usava com trator, pasto ou benfeitoria antes de 22 de julho de 2008. A lei dá um desconto para quem já trabalhava lá antes dessa data!')" role="button" tabindex="0">
+                                    <div class="video-placeholder"><span>▶ Ouvir Explicação</span></div>
                                     <h4>O que é Área Consolidada?</h4>
                                 </div>
                             </div>
@@ -289,8 +292,9 @@
                                 <button onclick="sendQuickMessage('E o crédito rural?')">Crédito Rural</button>
                             </div>
                             <div class="chat-input-bar">
-                                <input type="text" id="chat-input" placeholder="Pergunte algo à Cisca...">
-                                <button class="btn-send" onclick="submitChatMessage()"><span class="material-icons">mic</span></button>
+                                <input type="text" id="chat-input" placeholder="Pergunte ou aperte o microfone...">
+                                <!-- Mudado ícone para destacar o comando por voz, crucial para o produtor rural -->
+                                <button class="btn-send" onclick="submitChatMessage()" aria-label="Gravar áudio ou enviar mensagem"><span class="material-icons">mic</span></button>
                             </div>
                         </div>
                     </div>
@@ -300,7 +304,7 @@
                         <div class="padding-m">
                             <h3>Perfil Cadastral</h3>
                             <div class="profile-summary">
-                                <div class="mascote-avatar large">🧑‍🌾</div>
+                                <div class="mascote-avatar large" role="img" aria-label="Avatar do Produtor">🧑‍🌾</div>
                                 <h4 id="perf-name">Seu Raimundo Nonato</h4>
                                 <p class="text-muted" id="perf-role">Produtor Familiar</p>
                             </div>
@@ -316,18 +320,18 @@
                 </main>
 
                 <!-- ABA DE NAVEGAÇÃO INFERIOR -->
-                <nav class="bottom-nav">
+                <nav class="bottom-nav" aria-label="Navegação inferior do aplicativo">
                     <button class="nav-item active" id="nav-dash" onclick="switchSubScreen('sub-dashboard')">
-                        <span class="material-icons">home</span><span>Início</span>
+                        <span class="material-icons" aria-hidden="true">home</span><span>Início</span>
                     </button>
                     <button class="nav-item" id="nav-time" onclick="switchSubScreen('sub-timeline')">
-                        <span class="material-icons">route</span><span>Passos</span>
+                        <span class="material-icons" aria-hidden="true">route</span><span>Passos</span>
                     </button>
                     <button class="nav-item" id="nav-chat" onclick="switchSubScreen('sub-chat')">
-                        <span class="material-icons">forum</span><span>Cisca Chat</span>
+                        <span class="material-icons" aria-hidden="true">forum</span><span>Cisca Chat</span>
                     </button>
                     <button class="nav-item" id="nav-perf" onclick="switchSubScreen('sub-perfil')">
-                        <span class="material-icons">person</span><span>Perfil</span>
+                        <span class="material-icons" aria-hidden="true">person</span><span>Perfil</span>
                     </button>
                 </nav>
             </div>
@@ -336,19 +340,19 @@
     </div>
 
     <!-- DIÁLOGOS E NOTIFICAÇÕES GLOBAIS (TOASTS E MODAIS) -->
-    <div id="custom-modal" class="modal-overlay hidden">
+    <div id="custom-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-box animate-pop">
             <div class="modal-header">
                 <h4 id="modal-title">Título</h4>
-                <button class="btn-icon" onclick="closeModal()"><span class="material-icons">close</span></button>
+                <button class="btn-icon" onclick="closeModal()" aria-label="Fechar janela"><span class="material-icons">close</span></button>
             </div>
             <div class="modal-body" id="modal-body">Conteúdo</div>
             <button class="btn btn-primary w-100" onclick="closeModal()">Entendi!</button>
         </div>
     </div>
 
-    <div id="custom-toast" class="toast-box hidden" onclick="handleToastNavigation()">
-        <span class="material-icons">notifications_active</span>
+    <div id="custom-toast" class="toast-box hidden" onclick="handleToastNavigation()" role="alert" style="cursor: pointer;">
+        <span class="material-icons" aria-hidden="true">notifications_active</span>
         <div>
             <h5 id="toast-title">Aviso Importante</h5>
             <p id="toast-body" class="text-small">Toque para verificar.</p>
