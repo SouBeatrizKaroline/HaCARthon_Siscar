@@ -53,17 +53,21 @@ const scenarios = {
 };
 
 // ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA)
+// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA EXPANDIDO)
 // ==========================================
 const ciscaKnowledge = {
-    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
-    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
-    "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
-    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
-    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
-    "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
-    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
-    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!"
+    "app": "APP é a Área de Preservação Permanente. É a mata que protege as margens de rios, córregos e nascentes. Manter essa vegetação em pé evita que o barranco caia (assoreamento) e garante que a água do seu sítio não seque!",
+    "reserva legal": "A Reserva Legal é uma fatia de mata nativa dentro da sua propriedade que não pode ser desmatada, mas pode ser usada para manejo sustentável. Em Goiás e na maior parte do país, ela corresponde a 20% da área total da sua terra.",
+    "car": "O CAR (Cadastro Ambiental Rural) é o registro eletrônico obrigatório para todos os imóveis rurais. Ele funciona como o 'RG Ambiental' da sua terra e serve para planejar a conservação do nosso país.",
+    "sicar": "O SICAR é o Sistema Nacional de Cadastro Ambiental Rural. É o sistema de computador do governo federal onde todos os estados unificam os mapas e dados do CAR. É lá que os analistas conferem as fotos de satélite.",
+    "lei": "A lei principal é o Novo Código Florestal (Lei nº 12.651/2012). O Siscar+ serve justamente para traduzir esse textão de advogado para a linguagem prática de quem lida com a terra todo dia!",
+    "pendencia": "Fique tranquilo! Uma pendência geralmente significa que o analista do Estado achou alguma divergência no desenho do mapa (como a largura de um rio) ou precisa que você envie uma foto ou documento complementar.",
+    "credito rural": "Os bancos e cooperativas exigem o CAR regularizado (ou em processo de regularização com o PRA ativo) para liberar financiamentos como Pronaf, custeio ou investimentos. Quem está em dia com a Cisca consegue crédito mais rápido e barato!",
+    "prada": "O PRADA é o Projeto de Recomposição de Áreas Degradadas e Alteradas. É um plano de ação bem simples onde a gente escreve como você vai recuperar a mata que sumiu: se vai plantar mudas, cercar para a natureza crescer sozinha ou plantar sementes.",
+    "pra": "O PRA é o Programa de Regularização Ambiental. Se você teve algum desmatamento antigo (antes de julho de 2008), o governo te dá anistia de multas se você entrar no PRA e assinar o compromisso de recuperar o que falta.",
+    "multa": "Se você tiver passivo ambiental anterior a 22 de julho de 2008 e fizer a inscrição no CAR e aderir ao PRA, as multas antigas ficam suspensas! É por isso que regularizar o quanto antes protege o seu bolso.",
+    "modulo fiscal": "Módulo Fiscal é uma unidade de medida em hectares que muda de acordo com o seu município. Imóveis com até 4 módulos fiscais são considerados pequenas propriedades ou agricultura familiar e têm direito a regras muito mais fáceis e apoios do governo!",
+    "ajuda": "Estou aqui para descomplicar! Pode me perguntar termos como: 'SICAR', 'APP', 'Reserva Legal', 'PRADA', 'PRA', 'Multa' ou 'Crédito Rural'. O que está tirando o seu sono hoje?"
 };
 
 let activeScenario = 1;
@@ -207,7 +211,7 @@ function submitChatMessage() {
         let reply = "";
         const lower = val.toLowerCase();
 
-        // Procura por palavras-chave no dicionário amigável
+        // Procura por palavras-chave no dicionário expandido
         for (const k in ciscaKnowledge) {
             if (lower.includes(k)) {
                 reply = ciscaKnowledge[k];
@@ -216,7 +220,7 @@ function submitChatMessage() {
         }
 
         if (!reply) {
-            reply = "Essa funcionalidade de IA ainda está em evolução no protótipo do Siscar+. Na versão completa do produto, nossa Inteligência Artificial lerá o Código Florestal e os Manuais Oficiais para te responder com total certeza técnica!";
+            reply = "Essa funcionalidade de IA ainda está em evolução no protótipo do Siscar+. Na versão completa do produto, nossa Inteligência Artificial lerá o Código Florestal e os Manuais Oficiais do SICAR para te responder com total certeza técnica!";
         }
 
         insertMessage("🐔 Cisca", reply, "received");
@@ -258,12 +262,16 @@ function handleToastNavigation() {
     switchSubScreen('sub-explique');
 }
 
-// Monitora tecla Enter no campo do Chat
-document.getElementById('chat-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') submitChatMessage();
-});
-
-// Inicialização Padrão
-window.onload = () => {
+// Inicialização amigável de Listeners e Estado Inicial
+document.addEventListener("DOMContentLoaded", () => {
+    // Monitora tecla Enter no campo do Chat de forma segura após o DOM carregar
+    const chatInput = document.getElementById('chat-input');
+    if(chatInput) {
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') submitChatMessage();
+        });
+    }
+    
+    // Roda o cenário inicial
     selectScenario(1);
-};
+});
