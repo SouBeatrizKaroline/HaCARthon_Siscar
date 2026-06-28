@@ -279,5 +279,6 @@ document.getElementById('chat-input').addEventListener('keypress', function (e) 
 
 // Inicialização Padrão
 window.onload = () => {
-    selectScenario(1);
+    selectScenario(1);            // 1º: Monta a interface na hora (Zero delay visual)
+    carregarConhecimentoCisca();  // 2º: Puxa o JSON em segundo plano (Sem travar a tela)
 };
