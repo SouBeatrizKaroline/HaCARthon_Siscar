@@ -12,7 +12,7 @@ Preparamos o nosso Pitch comercial e duas demonstrações práticas em vídeo pa
   [Assista aqui ao nosso Pitch no YouTube](URL_DO_YOUTUBE) para entender o modelo de negócio, o problema do campo e a nossa proposta de valor em menos de 3 minutos.
 
 * **💻 Gravação do Protótipo (Geral da Solução):**
-👉 **[Acesse Aqui](https://soubeatrizkaroline.github.io/HaCARthon_Ciscar/)**
+👉 **[Acesse Aqui](https://soubeatrizkaroline.github.io/HaCARthon_Siscar/)**
   <video src="https://github.com/user-attachments/assets/13ee585c-85b8-4ea5-8ba5-c672fb193cfe" controls="controls" style="max-width: 100%; margin-top: 10px; display: block;"></video>
   *(Caso o player não carregue, [clique aqui para assistir diretamente no GitHub](https://github.com/user-attachments/assets/13ee585c-85b8-4ea5-8ba5-c672fb193cfe))*
     
@@ -50,7 +50,7 @@ Como uma assistente virtual focada na linguagem da terra, a Cisca atua como uma 
 
 ## 🌐 Link de Acesso Rápido
 Para testar a aplicação rodando em tempo real sem precisar baixar o código, acesse o link do protótipo funcional:
-👉 **[Demonstração Online - Siscar+](https://soubeatrizkaroline.github.io/HaCARthon_Ciscar/)**
+👉 **[Demonstração Online - Siscar+](https://soubeatrizkaroline.github.io/HaCARthon_Siscar/)**
 
 ⚠️ **Nota sobre a Visualização do Protótipo:** Como o design foi projetado sob a filosofia *Mobile-First* (focado em dispositivos móveis) e está em fase de validação, caso você o acesse por um monitor ou tela de alta resolução, **pode ser necessário ajustar o zoom do seu navegador (para menos ou para mais)** para obter a melhor experiência de layout. Essa calibração de responsividade desktop será refinada e ajustada automaticamente nas próximas versões!
 
@@ -109,4 +109,4 @@ Como o projeto preza pela leveza e arquitetura limpa, você não precisa instala
 
 1. Clone o repositório para sua máquina local:
    ```bash
-   git clone [https://github.com/soubeatrizkaroline/HaCARthon_Ciscar.git](https://github.com/soubeatrizkaroline/HaCARthon_Ciscar.git)
+   git clone [https://github.com/soubeatrizkaroline/HaCARthon_Siscar.git](https://github.com/soubeatrizkaroline/HaCARthon_Siscar.git)
