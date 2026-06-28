@@ -53,23 +53,56 @@ const scenarios = {
 };
 
 // ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA)
+// CENTRAL DE RESPOSTAS DA CISCA
 // ==========================================
 const ciscaKnowledge = {
-    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
-    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
-    "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
-    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
-    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
-    "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
-    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
-    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!",
+    // ==========================================
+    // GRUPO 1: CONCEITOS BÁSICOS (O "RG" DA TERRA)
+    // ==========================================
+    "car": "O CAR é o Cadastro Ambiental Rural, o 'RG' da sua terra. Ele puxa todas as informações ambientais do seu sítio (onde tem rio, mata, etc). Fazer o CAR é o primeiríssimo passo para deixar a terra regularizada. Sem ele, você fica travado para pegar crédito no banco, não consegue autorização para tirar árvore e nem desconto no imposto da terra (ITR)!",
     "sicar": "O SICAR é o Sistema Nacional de Cadastro Ambiental Rural. Pense nele como o grande computador de Brasília onde ficam guardados os 'RGs' (CAR) de todas as fazendas do Brasil. É lá que os técnicos do governo olham o mapa da sua terra.",
+    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
+    "central do proprietario": "A Central do Proprietário é a sua 'caixa de correio' com o governo. É um site onde você entra com seu CPF e o número do recibo do CAR. Por lá, você baixa a 2ª via do recibo, vê o andamento da análise, responde às mensagens dos técnicos do Estado e envia os documentos que eles pedirem sem precisar ir até a cidade.",
+
+    // ==========================================
+    // GRUPO 2: AS REGRAS DA NATUREZA (APP E RESERVA)
+    // ==========================================
+    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
+    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região ela equivale a 20% do tamanho da sua fazenda (mas na Amazônia pode chegar a 80%). Você não pode desmatar ela, mas pode colher frutos, castanhas ou manejar com licença.",
     "corpo hidrico": "Para o governo, não importa se você chama de corguinho, igarapé, riacho, riozinho, brejo ou nascente: tudo isso entra na mesma gaveta chamada 'Corpo Hídrico'. A regra é a mesma para todos: a água precisa de uma mata em volta para não secar!",
-    
-    // Chaves de suporte para o fluxo de interpretação (Intenção -> Validação)
+    "nascente": "Nascente é o 'olho d'água', onde a água brota da terra. Pela lei, você precisa proteger um raio de 50 metros em volta dela com cerca e mata nativa para que ela nunca pare de correr.",
+
+    // ==========================================
+    // GRUPO 3: DINHEIRO E BENEFÍCIOS NO BOLSO
+    // ==========================================
+    "credito rural": "O banco só libera o dinheiro do Pronaf, Pronamp ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
+    "beneficios": "Estar com o CAR em dia traz muita vantagem: você ganha desconto no imposto ITR, consegue juros bem mais baixos e prazos maiores nos financiamentos do banco, tem desconto no seguro da lavoura, não precisa mais gastar dinheiro registrando a Reserva Legal no Cartório de Imóveis e ainda ganha isenção de imposto em materiais como arame farpado, postes e bombas d'água para cuidar da sua terra!",
+    "itr": "O ITR é o imposto da sua terra. Se você declarar o CAR direitinho e comprovar as áreas de mata (APP e Reserva), você pode abater essas áreas e pagar um imposto bem menor todo ano!",
+
+    // ==========================================
+    // GRUPO 4: RESOLVENDO PROBLEMAS (PRA E PRADA)
+    // ==========================================
+    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
+    "pra": "O PRA é o Programa de Regularização Ambiental. Se você teve algum passivo ou tirou mata antes de julho de 2008, o PRA é um acordo amigável com o governo. Ao entrar nele, todas as multas e processos antigos ficam congelados ('suspensos') enquanto você arruma a sua terra plantando as mudinhas ou regenerando a mata.",
+    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
+    "passivo ambiental": "Passivo ambiental significa que tem alguma 'dívida' com a natureza no seu sítio, tipo um pedaço de beira de rio desmatado ou menos Reserva Legal do que a lei pede. A boa notícia é que dá para parcelar e resolver essa dívida sem desespero.",
+    "multa": "Se você tem medo de multa, o segredo é o CAR e o PRA. Quem entra no programa de regularização e cumpre o combinado não leva multa pelas derrubadas antigas (feitas antes de 2008). O governo quer que você arrume a terra, não quer te quebrar!",
+
+    // ==========================================
+    // GRUPO 5: QUEM MANDA EM QUÊ? (ÓRGÃOS E ESTADOS)
+    // ==========================================
+    "estados": "A regra do CAR vale para o Brasil inteiro, mas cada estado se organiza de um jeito. Alguns estados usam o sistema direto de Brasília (como Goiás, Pernambuco e Santa Catarina), enquanto outros têm um sistema próprio do estado (como São Paulo, Mato Grosso, Minas e Pará). Se o seu sistema for do próprio estado, o recibo pode demorar uns dias a mais para aparecer no computador de Brasília.",
+    "servico florestal": "O Serviço Florestal Brasileiro (SFB) é o órgão do governo federal que cuida do grande sistema do CAR em Brasília. É o pessoal que ajuda os estados a organizarem os mapas e divulga para o país inteiro como está indo a regularização das terras.",
+    "orgao ambiental": "É a Secretaria de Meio Ambiente do seu estado (como SEMAD, SEMA, CETESB, IEF). São os técnicos desse órgão que abrem o seu cadastro no computador para carimbar se o mapa está certo ou se precisa corrigir algo.",
+
+    // ==========================================
+    // GRUPO 6: FLUXOS DE INTERPRETAÇÃO E SUPORTE
+    // ==========================================
+    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências', 'Crédito Rural', 'PRA', 'Vantagens' ou 'Central do Proprietário'. Digite uma palavra ou selecione uma tag!",
     "medo de multa": "Calma, parceiro! Nem toda pendência ou aviso no sistema significa multa imediata. Na maioria das vezes, o governo só está pedindo para corrigir o desenho do mapa ou comprovar uma informação. Vamos dar uma olhada juntos antes de se preocupar.",
     "fluxo pendencia app": "Quando o sistema avisa que deu 'problema na beira do rio', a gente faz três passos: 1º Olhamos se tem mesmo uma pendência no seu CAR; 2º Consultamos o SICAR para ver o que o técnico escreveu; 3º Olhamos na Lei o que precisa ser feito (como o PRADA) para resolver sem você levar puxão de orelha."
+
+
 };
 
 let activeScenario = 1;
