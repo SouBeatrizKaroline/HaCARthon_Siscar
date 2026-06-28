@@ -1,3 +1,5 @@
+![Logo Siscar+](logo.png)
+
 # 🚜 Siscar+ | Inteligência Ambiental e Acessibilidade no CAR
 
 > **Desafio 3 (haCARthon):** Desenvolver soluções inovadoras para aumentar o entendimento da legislação ambiental pelos proprietários rurais, aproximando o cidadão do órgão fiscalizador de forma clara e humana.
