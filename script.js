@@ -53,60 +53,18 @@ const scenarios = {
 };
 
 // ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA EXPANDIDO - DESAFIO 3)
+// CENTRAL DE RESPOSTAS DA CISCA (MOCK DE IA)
 // ==========================================
-// ==========================================
-// CENTRAL DE RESPOSTAS DA CISCA
-// ==========================================
-
 const ciscaKnowledge = {
-    "o que e o car": "O CAR é o Cadastro Ambiental Rural. É como se fosse uma identidade da sua terra, mas focada na natureza dela. Todo imóvel rural precisa ter para ficar em dia com a lei!",
-    
-    "vou pagar multa": "Olha, a ideia do governo não é sair multando quem quer andar certo! Se você fizer o cadastro e assumir o compromisso de cuidar ou recuperar o que precisa, as multas antigas ficam suspensas.",
-    
-    "medo de multa": "Fica tranquilo! O Siscar+ serve justamente para te ajudar a regularizar a terra sem susto. Entrando no programa de regularização, você ganha prazo e não toma multa por isso.",
-    
-    "quanto custa": "Fazer o CAR é de graça! O governo não cobra taxa nenhuma para registrar a sua terra no sistema.",
-    
-    "o que e app": "APP significa Área de Preservação Permanente. São aqueles lugares na sua fazenda que a gente não pode mexer de jeito nenhum, como a beira de um rio, nascentes ou topo de morro, para proteger a água e a terra.",
-    
-    "o que e prada": "O PRADA é o Projeto de Recomposição de Áreas Degradadas e Alteradas. É basicamente um plano simples dizendo onde e como você vai plantar as mudinhas de árvore nativa para recuperar a beira do rio.",
-    
-    "credito rural": "Com o CAR aprovado e 100% regularizado, o banco vê que sua terra está em dia e libera os financiamentos e o Crédito Rural com os juros mais baixos para você investir na lavoura!"
+    "app": "APP é a Área de Preservação Permanente. É a mata protetora de rios, córregos e nascentes. Deixar a vegetação lá evita que a terra desmorone e falte água para sua própria plantação!",
+    "reserva legal": "A Reserva Legal é uma fatia de vegetação nativa que todo sítio precisa guardar. Aqui na nossa região de Cerrado/Mata ela equivale a 20% do tamanho da sua fazenda.",
+    "car": "O CAR é o Cadastro Ambiental Rural. Pense nele como o RG da sua terra. Ele serve para mostrar ao governo que você produz respeitando os recursos naturais.",
+    "lei": "A lei que rege nosso campo é o Código Florestal (Lei 12.651/2012). Sei que parece complicada, mas meu papel é traduzir cada artigo para te dar segurança!",
+    "pendencia": "Não se assuste! Uma pendência só significa que o técnico do governo viu um ponto de melhoria no mapa ou precisa de uma certidão atualizada.",
+    "credito rural": "O banco só libera o dinheiro do Pronaf ou do custeio se o CAR estiver em dia. Cuidar do meio ambiente hoje é o segredo para conseguir o recurso da próxima safra!",
+    "prada": "PRADA é o Projeto de Recomposição de Áreas Degradadas. É apenas um plano simples onde combinamos onde e como você vai plantar as árvores que faltam.",
+    "ajuda": "Estou aqui para ajudar! Você pode me perguntar sobre 'APP', 'Reserva Legal', 'Pendências' ou 'Crédito Rural'. Digite uma palavra ou selecione uma tag!"
 };
-
-// 2. Função assíncrona para buscar as respostas no arquivo JSON
-async function carregarConhecimentoDaCisca() {
-    try {
-        // Altere 'perguntas.json' para o caminho correto caso o arquivo esteja em outra pasta
-        const resposta = await fetch('perguntas.json'); 
-        
-        // Se o arquivo não for encontrado, avisa o sistema
-        if (!resposta.ok) {
-            throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`);
-        }
-
-        // CORREÇÃO AQUI: Trocado 'reply' por 'resposta' e 'bancoDeRespostas' por 'ciscaKnowledge'
-        ciscaKnowledge = await resposta.json();
-        
-        console.log("Prosa carregada! A Cisca está pronta para responder sobre o CAR.");
-    } catch (xabu) {
-        console.error("Eita! Deu erro ao puxar o conhecimento da Cisca:", xabu);
-    }
-}
-
-// 3. Função auxiliar para você chamar no seu chatbot ou caixinha de pesquisa
-function perguntarParaCisca(chaveDaPergunta) {
-    // Verifica se o JSON já foi carregado e se a pergunta existe
-    if (ciscaKnowledge && ciscaKnowledge[chaveDaPergunta]) {
-        return ciscaKnowledge[chaveDaPergunta];
-    } else {
-        return "Ih, meu filho, sobre isso aí a Cisca ainda não ouviu falar na redondeza...";
-    }
-}
-
-// 4. LIGA OS MOTORES: Executa a carga dos dados assim que o script roda
-carregarConhecimentoDaCisca();
 
 let activeScenario = 1;
 
@@ -249,7 +207,7 @@ function submitChatMessage() {
         let reply = "";
         const lower = val.toLowerCase();
 
-        // Procura por palavras-chave no dicionário expandido
+        // Procura por palavras-chave no dicionário amigável
         for (const k in ciscaKnowledge) {
             if (lower.includes(k)) {
                 reply = ciscaKnowledge[k];
@@ -258,7 +216,7 @@ function submitChatMessage() {
         }
 
         if (!reply) {
-            reply = "Essa funcionalidade de IA ainda está em evolução no protótipo do Siscar+. Na versão completa do produto, nossa Inteligência Artificial lerá o Código Florestal e os Manuais Oficiais do SICAR para te responder com total certeza técnica!";
+            reply = "Essa funcionalidade de IA ainda está em evolução no protótipo do Siscar+. Na versão completa do produto, nossa Inteligência Artificial lerá o Código Florestal e os Manuais Oficiais para te responder com total certeza técnica!";
         }
 
         insertMessage("🐔 Cisca", reply, "received");
@@ -287,7 +245,7 @@ function closeModal() {
 }
 
 // GESTÃO DE TOAST NOTIFICATION
-function triggerNotification(title = "Alerta Siscar+", msg = "Seu cadastro possui updates.") {
+function triggerNotification(title = "Alerta Siscar+", msg = "Seu cadastro possui atualizações pendentes.") {
     document.getElementById('toast-title').innerText = title;
     document.getElementById('toast-body').innerText = msg;
     const t = document.getElementById('custom-toast');
@@ -300,30 +258,12 @@ function handleToastNavigation() {
     switchSubScreen('sub-explique');
 }
 
-// Inicialização amigável de Listeners e Estado Inicial
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. FAZER A SPLASH SCREEN AVANÇAR COM UM CLIQUE EM QUALQUER LUGAR DELA
-    // Mapeia tanto por ID quanto pela primeira tela ativa encontrada (conforme a imagem_eec777.png)
-    const splashScreen = document.getElementById('screen-splash') || document.querySelector('.app-screen.active');
-    
-    if (splashScreen) {
-        splashScreen.style.cursor = 'pointer'; 
-        splashScreen.addEventListener('click', (e) => {
-            // Impede que clique nos botões laterais do Hackathon de mudar cenários dispare o login acidentalmente
-            if (!e.target.closest('.demo-btn')) {
-                performLogin();
-            }
-        });
-    }
-
-    // Monitora tecla Enter no campo do Chat de forma segura após o DOM carregar
-    const chatInput = document.getElementById('chat-input');
-    if(chatInput) {
-        chatInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') submitChatMessage();
-        });
-    }
-    
-    // Roda o cenário inicial padrão
-    selectScenario(1);
+// Monitora tecla Enter no campo do Chat
+document.getElementById('chat-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') submitChatMessage();
 });
+
+// Inicialização Padrão
+window.onload = () => {
+    selectScenario(1);
+};
