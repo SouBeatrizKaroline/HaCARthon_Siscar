@@ -4,44 +4,47 @@
 
 ---
 
-## 🎨 Nossa Logo
+## 🎬 Demonstrações e Links de Acesso
 
-![Logo Siscar+](logo.png)
+Preparamos o nosso Pitch comercial e duas demonstrações práticas em vídeo para você ver o ecossistema do **Siscar+** funcionando na prática:
 
-## 🎨 Identidade Visual & Paleta de Cores
+* **🚀 Vídeo de Pitch (Apresentação Comercial):**
+  [Assista aqui ao nosso Pitch no YouTube](URL_DO_YOUTUBE) para entender o modelo de negócio, o problema do campo e a nossa proposta de valor em menos de 3 minutos.
 
-A identidade do **Siscar+** foi planejada para transmitir **confiança, sustentabilidade e proximidade com o produtor do campo**, equilibrando o verde da preservação ambiental com o calor e a energia do ecossistema agrícola.
+* **💻 Gravação do Protótipo (Geral da Solução):**
+👉 **[Acesse Aqui](https://soubeatrizkaroline.github.io/HaCARthon_Ciscar/)**
+  <video src="https://github.com/user-attachments/assets/13ee585c-85b8-4ea5-8ba5-c672fb193cfe" controls="controls" style="max-width: 100%; margin-top: 10px; display: block;"></video>
+  *(Caso o player não carregue, [clique aqui para assistir diretamente no GitHub](https://github.com/user-attachments/assets/13ee585c-85b8-4ea5-8ba5-c672fb193cfe))*
+    
+* **📱 A Cisca no WhatsApp (Experiência Prática móvel):** 
+  <video src="https://github.com/user-attachments/assets/ab87b40b-8143-4acc-ba2c-19792108b15c" controls="controls" style="max-width: 100%; margin-top: 10px; display: block;"></video>
+
+---
+
+## 🎨 Nossa Identidade Visual
+
+A identidade do **Siscar+** foi planejada para transmitir **confiança, sustentabilidade e proximidade com o produtor do campo**. Como ilustrado em logo_3.png, a marca equilibra o rigor da preservação ambiental com o calor e a energia do ecossistema agrícola de forma moderna e humana.
+
+![Logo Siscar+](logo_3.png)
 
 ### 🎨 Paleta de Cores Oficial
 
-| Cor | Hexadecimal | Significado e Aplicação |
+| Cor | Hexadecimal | Significado e Aplicação Tecnológica |
 | :---: | :---: | :--- |
-| **Verde Floresta** | `#007025` | Cor principal da marca (texto "Siscar"). Representa a vegetação nativa, o cumprimento da legislação ambiental e a sustentabilidade. |
-| **Laranja Alerta** | `#FF6B00` | Destaque do símbolo "+" e alertas de urgência. Transmite ação, dinamismo e o destravamento do crédito rural. |
-| **Amarelo Sol** | `#FFEB60` | Fundo do ícone da Cisca. Traz acolhimento, energia positiva e a clareza necessária para simplificar o "juridiquês". |
-| **Cinza Mineral** | `#555555` | Utilizado na tipografia de suporte ("SIMPLIFICANDO O CAR"). Garante excelente legibilidade e neutralidade técnica. |
-
-### 🐔 A Mascote: Cisca
-A nossa mascote foi desenhada para quebrar a frieza dos sistemas governamentais tradicionais. A escolha de uma galinha simpática e expressiva gera identificação imediata com o cotidiano do produtor rural, transformando o atendimento em uma conversa amigável entre parceiros de campo
+| **Verde Floresta** | `#007025` | Cor principal da marca (texto "Siscar", linha guia e folha estilizada). Representa a vegetação nativa, a conformidade com o Código Florestal e a sustentabilidade no campo. |
+| **Laranja Alerta** | `#FF6B00` | Destaque do símbolo "+". Representa a desmistificação do processo, a energia do agronegócio e o destravamento do crédito rural. |
+| **Amarelo Sol** | `#FFEB60` | Fundo do brasão circular da Cisca. Traz acolhimento, otimismo e a clareza necessária para iluminar o "juridiquês". |
+| **Cinza Mineral** | `#555555` | Utilizado na assinatura de suporte ("SIMPLIFICANDO O CAR"). Garante excelente legibilidade, sobriedade técnica e neutralidade institucional. |
 
 ---
 
-## 🐔 Conheça a Cisca!
-O grande gargalo do Cadastro Ambiental Rural (CAR) não é a falta de vontade do produtor, mas a complexidade do "juridiquês" das notificações oficiais. Quando o **Seu Raimundo** recebe um alerta dizendo que *"infracionou o Artigo 61-A da Lei 12.651/2012"*, o medo paralisa o processo.
+## 🐔 Conheça a Cisca: A Voz do Campo no CAR
 
-O **Siscar+** resolve isso humanizando a comunicação através da **Cisca**, uma assistente virtual focada na linguagem do campo, que traduz termos jurídicos em tarefas práticas e visuais.
+O grande gargalo do Cadastro Ambiental Rural (CAR) não é a falta de vontade do produtor rural, mas a complexidade técnico-jurídica das notificações oficiais. Quando o **Seu Raimundo** abre uma notificação do órgão ambiental e se depara com um texto dizendo que ele *"infracionou o Artigo 61-A da Lei nº 12.651/2012 e necessita retificar a feição geométrica da Área de Preservação Permanente (APP)"*, o medo e a confusão paralisam o processo. 
 
----
+A **Cisca** foi desenhada exatamente para romper essa barreira de comunicação. Ela substitui a frieza dos sistemas governamentais tradicionais por uma figura familiar, expressiva e acolhedora, presente no cotidiano do ecossistema rural. 
 
-## 🎬 Demonstrações em Vídeo
-
-Preparamos duas demonstrações rápidas para você ver a nossa solução funcionando na prática:
-
-*   **🚀 Pitch e Protótipo do Sistema (2 Minutos):**
-    [Assista aqui ao nosso video da Solução](URL_DO_VIDEO) para ver como a nossa assistente interage com o produtor rural usando uma linguagem simples e acessível.
-    
-*   **📱 A Cisca no WhatsApp (Experiência Prática):** 
-    <video src="https://github.com/user-attachments/assets/ab87b40b-8143-4acc-ba2c-19792108b15c" controls="controls" style="max-width: 100%; margin-top: 10px;"></video>
+Como uma assistente virtual focada na linguagem da terra, a Cisca atua como uma ponte humana: ela traduz artigos complexos em tarefas visuais, práticas e direto ao ponto, transformando uma imposição legal assustadora em uma conversa simples e amigável entre parceiros de campo.
 
 ---
 
