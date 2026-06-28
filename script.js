@@ -296,6 +296,38 @@ const ciscaKnowledge = {
     "duvidas sobre analise da reserva": "Se o seu CAR já foi enviado e você quer saber por que o técnico aprovou ou reprovou o desenho da sua Reserva Legal, a resposta está com o órgão ambiental do seu estado. Como cada secretaria estadual tem seus critérios e leis próprias, o jeito é entrar em contato com eles pelos canais oficiais que ficam na aba 'Contatos' do site do CAR.",
     "saber a situacao de regularizacao": "Para ver se a situação da sua terra está verde ou vermelha perante a natureza, você tem dois caminhos no site do CAR: puxar o 'Demonstrativo da Situação' na consulta pública (usando o número do seu recibo) ou entrar na sua Central do Proprietário. Ali o sistema te diz claramente se o seu CAR está ativo, pendente ou cancelado, e se o técnico já analisou o seu mapa de Reserva Legal."
 
+// ==========================================
+    // GRUPO 24: AS QUATRO ETAPAS DA REGULARIZAÇÃO
+    // ==========================================
+    "etapas da regularizacao": "O caminho para deixar as matas do seu sítio 100% em dia com a lei é feito em quatro passos bem claros: primeiro você faz a **Inscrição no CAR**; depois fica de olho no **Acompanhamento** pela internet; se tiver alguma pendência, parte para a **Regularização** assinando um acordo; e, se sobrar ou faltar mata, dá para resolver tudo na fase de **Negociação** de ativos.",
+    
+    // ==========================================
+    // SUBGRUPO: ETAPA 1 - INSCRIÇÃO PASSO A PASSO
+    // ==========================================
+    "como baixar o modulo": "Se o seu estado não tiver um sistema próprio, o jeito é usar o Módulo de Cadastro nacional. Você entra no site (car.gov.br), vai na aba 'Baixar', escolhe a sigla do seu estado e instala o programa no computador. Só fique atento se a sua máquina aguenta o tranco do programa para não ficar travando, viu?",
+    "botoes do programa do car": "Quando você abre o programa do CAR na tela, ele te mostra cinco botões principais para comandar tudo: o 'Baixar Imagens' (para ver as fotos de satélite da sua região), o 'Cadastrar' (para começar a preencher), o 'Gravar para Envio' (para fechar o arquivo quando terminar), o 'Enviar' (para mandar o documento para o governo) e o 'Retificar' (se precisar corrigir alguma coisa).",
+    "preenchimento do cadastro": "Depois de clicar em 'Cadastrar Novo Imóvel', você escolhe o tipo da terra. Aí é hora de colocar a mão na massa: digita quem é o dono ou posseiro, anexa os documentos da terra e começa a desenhar no mapa onde ficam as benfeitorias, as beiras de rio (APP), as matas fechadas e o desenho da Reserva Legal. No fim, responde um questionário sobre a situação do sítio e clica em 'Finalizar'.",
+    "cuidado antes de gravar": "Olhe com muita atenção antes de clicar no botão 'Gravar para Envio'! Depois que você grava, o sistema tranca o arquivo e você não consegue mudar mais nada nele. Se você gravou com erro e ainda **não** enviou para a internet, aquele arquivo não serve mais e você terá que refazer o cadastro todinho do zero. Agora, se você já enviou e gerou o Recibo, aí dá para consertar usando o botão 'Retificar', desde que o técnico do governo ainda não tenha puxado a sua pasta para analisar.",
+    "o que e o arquivo car": "Quando você termina de preencher tudo e grava o cadastro, o programa gera um papel chamado Protocolo de Preenchimento (que vem com o CPF do cadastrante) e um arquivo digital com o final **.car**. Guarde bem esse arquivo no seu computador, porque ele é a alma do seu cadastro! Mas atenção: só esse papel do Protocolo sozinho não prova que você está inscrito no CAR, ele é só o começo.",
+    "como enviar o arquivo car": "Para concluir a inscrição de verdade, você precisa de internet. Abra o programa, clique em 'Enviar', selecione aquele arquivo de final **.car** que ficou salvo no seu computador, digite as letrinhas de segurança que aparecem na tela e mande. Se der tudo certo, o sistema te dá um aviso com o link para você baixar e imprimir o seu **Recibo de Inscrição**.",
+    "importancia do recibo do car": "O Recibo de Inscrição é o seu documento oficial! É ele que prova para a fiscalização que você cumpriu o Código Florestal, que entregou os papéis das suas matas e, principalmente, é o papel que o gerente do banco vai exigir para liberar o seu crédito agrícola. Mas ó: ele não é título de posse da terra e nem te dá autorização automática para sair derrubando mato por conta própria, não!",
+
+    // ==========================================
+    // SUBGRUPO: ETAPA 2 - ACOMPANHAMENTO E STATUS
+    // ==========================================
+    "o que puxar na central": "Com o seu acesso na Central do Proprietário, você vira o gerente dos papéis da sua terra. Por lá você consegue puxar a segunda via do seu Recibo, baixar o arquivo **.car** se tiver perdido, ver a ficha detalhada do sítio, acompanhar o Demonstrativo da Situação das suas florestas e olhar o histórico de mensagens para ver se o técnico do governo te mandou algum aviso ou pedido de documento.",
+    "regras da analise estadual": "Quem manda na checagem dos dados é o órgão ambiental do seu estado. Eles olham tudo seguindo as regras nacionais e as leis da sua região. Se o técnico achar que o seu desenho está torto ou que falta papel, ele vai mudar o status do seu CAR. A qualquer momento, o seu cadastro pode ficar como **Ativo** (tudo certo), **Pendente** (com algum erro para arrumar) ou **Cancelado** (se você não responder o chamado dentro do prazo).",
+
+    // ==========================================
+    // SUBGRUPO: ETAPA 3 - REGULARIZAÇÃO E ACORDOS
+    // ==========================================
+    "regras do acordo do pra": "Se a análise do governo pegar que você está devendo mata que foi aberta antes de 22 de julho de 2008, você pode pedir para entrar no PRA. O estado vai te chamar para assinar um **Termo de Compromisso** único por imóvel. Enquanto você estiver cumprindo as metas de plantio ou conservação que aceitou, nenhuma multa antiga daquele pedaço pode te encostar a mão.",
+
+    // ==========
+    // SUBGRUPO: ETAPA 4 - NEGOCIAÇÃO DE ATIVOS
+    // ==========
+    "ganhar dinheiro com a mata": "A quarta etapa é a Negociação de Ativos, que é ótima para quem guardou floresta. Se a sua Reserva Legal cadastrada for maior do que a lei exige, esse pedaço que sobrou vira um 'ativo florestal'. Você pode negociar essa sobra com quem tem falta de mata para regularizar o sítio deles, seja vendendo títulos de CRA, alugando a área por Servidão Ambiental, vendendo pedaço dentro de Parques Nacionais para doação, ou fazendo o cadastramento direto desse excedente no sistema do SICAR."
+
 };
 
 let activeScenario = 1;
